@@ -1,3 +1,4 @@
+<?php ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +31,7 @@
                 <a href="/customer/{{$key + 1}}/{{$customer['name']}}/{{$customer['phone']}}/{{$customer['email']}}/show">Xem</a> |
                 <a href="/customer/{{$key + 1}}/edit">Sửa</a> |
                 <a href="#">Xóa</a>
+                <a href="{{ route('customer.edit', ($key + 1))}}">abc</a>
             </td>
         </tr>
     @empty

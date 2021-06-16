@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,25 +18,7 @@ use Illuminate\Support\Facades\Route;
 // Tạo 1 nhóm route với tiền tố customer
 Route::prefix('customer')->group(function () {
 
-    Route::get('index', function () {
-        $customers = [
-            [
-                "name" => "	Nguyễn Văn A",
-                "phone" => "01234567890",
-                "email" => "email.test@mail.com	"
-            ],
-            ["name" => "	Nguyễn Văn B	",
-                "phone" => "01234567890",
-                "email" => "email.test@mail.com		"
-            ],
-            [
-                "name" => "	Nguyễn Văn A",
-                "phone" => "01234567890",
-                "email" => "email.test@mail.com	"
-            ],
-        ];
-        return view('modules.customer.index' , compact('customers'));
-    })->name("customer.index");
+    Route::get('index',  [CustomerController::class , 'index'])->name("customer.index");
 
     Route::get('create', function () {
         // Hiển thị Form tạo khách hàng
@@ -46,7 +29,7 @@ Route::prefix('customer')->group(function () {
         return view('customer.index');
     })->name('customer.store');
 
-    Route::get('{id}/{name}/{phone}/{email}/show', function (Request $request ) {
+    Route::get('{id}/{name}/{phone}/{email}/show', function (Request $request) {
         $id = $request['id'];
         $name = $request['name'];
         $phone = $request['phone'];
@@ -62,7 +45,7 @@ Route::prefix('customer')->group(function () {
 
     Route::get('{id}/edit', function ($id) {
         var_dump($id);die();
-    });
+    })->name('customer.edit');
 
     Route::patch('{id}/update', function ($id) {
         // xử lý lưu dữ liệu thông tin khách hàng được chỉnh sửa thông qua PATCH từ form
