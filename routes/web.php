@@ -21,40 +21,17 @@ Route::prefix('customer')->group(function () {
     Route::get('index',  [CustomerController::class , 'index'])->name("customer.index");
 
     Route::get('create', function () {
-        // Hiển thị Form tạo khách hàng
         return view('modules.customer.create');
     })->name("customer.create");
 
-    Route::post('store', function () {
-        return view('customer.index');
-    })->name('customer.store');
+    Route::post('store' , [CustomerController::class , 'store'])->name('customer.store');
 
-    Route::get('{id}/{name}/{phone}/{email}/show', function (Request $request) {
-        $id = $request['id'];
-        $name = $request['name'];
-        $phone = $request['phone'];
-        $email = $request['email'];
-        $data = [
-            "id"=> $id,
-            "name"=> $name,
-            "phone"=> $phone,
-            "email"=> $email,
-        ];
-        return view('modules.customer.show' , compact('data'));
-    })->name('customer.show');
+    Route::get('{id}/{name}/{phone}/{email}/show', [CustomerController::class , 'show'])->name('customer.show');
 
-    Route::get('{id}/edit', function ($id) {
-        var_dump($id);die();
-    })->name('customer.edit');
+    Route::get('{id}/edit', [CustomerController::class , 'edit'])->name('customer.edit');
 
-    Route::patch('{id}/update', function ($id) {
-        // xử lý lưu dữ liệu thông tin khách hàng được chỉnh sửa thông qua PATCH từ form
-        var_dump($id);die();
-    });
+    Route::patch('{id}/update', [CustomerController::class , 'update'])->name('customer.update');
 
-    Route::delete('{id}', function ($id) {
-        // Xóa thông tin dữ liệu khách hàng
-        var_dump($id);die();
-    });
+    Route::delete('{id}', [CustomerController::class , 'destroy'])->name('customer.destroy');
 });
 

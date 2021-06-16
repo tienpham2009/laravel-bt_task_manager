@@ -39,7 +39,6 @@
             <td>No data</td>
         </tr>
     @endforelse
-
     </tbody>
 </table>
 </body>
